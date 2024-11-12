@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: video-transcoder
+
+Parameters:
+  InputBucketName:
+    Description: Initial files are deployed here
+    Type: String
+    Default: video-transcoder-input-bucket
+  OutputBucketName:
+    Description: Files that are the output of the lambda are here
+    Type: String
+    Default: video-transcoder-output-bucket
+Resources:
+  InputBucket: 
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref InputBucketName
+  OutputBucket: 
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref OutputBucketName
+

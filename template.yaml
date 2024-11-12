@@ -44,7 +44,7 @@ Resources:
           - Arn: !GetAtt VideoTranscoder.Arn
             Id: VideoTranscoder
   VideoTranscoder:
-    Type: 'AWS::Lambda::Function'
+    Type: AWS::Serverless::Function
     Properties:
       FunctionName: VideoTranscoder
       Handler: video-transcoder.lambda_handler

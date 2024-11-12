@@ -43,10 +43,10 @@ Resources:
         Targets:
           - Arn: !GetAtt VideoTranscoder.Arn
             Id: VideoTranscoder
-  LambdaFunction:
+  VideoTranscoder:
     Type: 'AWS::Lambda::Function'
     Properties:
-      FunctionName: AwsLambdaMinimalExample
+      FunctionName: VideoTranscoder
       Handler: video-transcoder.lambda_handler
       Runtime: python3.12
       Role: !GetAtt LambdaFunctionRole.Arn

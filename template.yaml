@@ -51,7 +51,7 @@ Resources:
       Runtime: python3.12
       Role: !GetAtt LambdaFunctionRole.Arn
       MemorySize: 1024
-      CodeUri: ./video-transcoder
+      CodeUri: video-transcoder/
   LambdaFunctionRole:
     Type: AWS::IAM::Role
     Properties:

@@ -19,4 +19,60 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref OutputBucketName
-
+  
+EventRule:
+  Type: AWS::Events::Rule
+  Properties:
+    EventPattern:
+      source:
+        - aws.s3
+      detail-type:
+        - 'AWS API Call via CloudTrail'
+      detail:
+        eventSource:
+          - s3.amazonaws.com
+        eventName:
+          - CopyObject
+          - PutObject
+          - CompleteMultipartUpload
+        requestParameters:
+          bucketName:
+            - !Ref InputBucketName
+          key:
+            - ""
+      Targets:
+        - Arn: !GetAtt VideoTranscoder.Arn
+          Id: VideoTranscoder
+LambdaFunction:
+  Type: 'AWS::Lambda::Function'
+  Properties:
+    FunctionName: AwsLambdaMinimalExample
+    Handler: video-transcoder.lambda_handler
+    Runtime: python3.12
+    Role: !GetAtt LambdaFunctionRole.Arn
+    MemorySize: 1024
+    CodeUri: ./video-transcoder.py
+LambdaFunctionRole:
+  Type: AWS::IAM::Role
+  Properties:
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Principal:
+          Service:
+          - lambda.amazonaws.com
+        Action:
+        - sts:AssumeRole
+    Path: "/"
+    Policies:
+    - PolicyName: AppendToLogsPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - logs:CreateLogGroup
+          - logs:CreateLogStream
+          - logs:PutLogEvents
+          Resource: "*"

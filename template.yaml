@@ -13,7 +13,7 @@ Parameters:
   VideoTranscoderBucketName:
     Description: Bucket that hosts the program
     Type: String
-    Default: video-transcoder-bucket
+    Default: video-transcoder-application-code-bucket
 Resources:
   InputBucket: 
     Type: AWS::S3::Bucket

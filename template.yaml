@@ -47,7 +47,7 @@ Resources:
             bucketName:
               - video-transcoder-input-bucket
             key:
-              - "/"
+              - "test/"
         Targets:
           - Arn: !GetAtt VideoTranscoder.Arn
             Id: VideoTranscoder

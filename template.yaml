@@ -1,5 +1,4 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
 Description: video-transcoder
 
 Parameters:
@@ -52,15 +51,19 @@ Resources:
         Targets:
           - Arn: !GetAtt VideoTranscoder.Arn
             Id: VideoTranscoder
+
   VideoTranscoder:
-    Type: AWS::Serverless::Function
+    Type: AWS::Lambda::Function
     Properties:
       FunctionName: VideoTranscoder
       Handler: video-transcoder.lambda_handler
       Runtime: python3.12
       Role: !GetAtt LambdaFunctionRole.Arn
       MemorySize: 1024
-      CodeUri: ./
+      Code:
+        S3Bucket: !Ref VideoTranscoderBucket
+        S3Key: /
+
   LambdaFunctionRole:
     Type: AWS::IAM::Role
     Properties:

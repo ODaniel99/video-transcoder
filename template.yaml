@@ -10,10 +10,10 @@ Parameters:
     Description: Files that are the output of the lambda are here
     Type: String
     Default: video-transcoder-output-bucket
-  VideoTranscoderBucketName:
-    Description: Bucket that hosts the program
-    Type: String
-    Default: video-transcoder-application-code-bucket
+  # VideoTranscoderBucketName:
+  #   Description: Bucket that hosts the program
+  #   Type: String
+  #   Default: video-transcoder-application-code-bucket
 Resources:
   InputBucket: 
     Type: AWS::S3::Bucket
@@ -23,10 +23,10 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref OutputBucketName
-  VideoTranscoderBucket: 
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Ref VideoTranscoderBucketName
+  # VideoTranscoderBucket: 
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Ref VideoTranscoderBucketName
   
   EventRule:
     Type: AWS::Events::Rule
@@ -61,7 +61,7 @@ Resources:
       Role: !GetAtt LambdaFunctionRole.Arn
       MemorySize: 1024
       Code:
-        S3Bucket: !Ref VideoTranscoderBucket
+        S3Bucket: video-transcoder-application-code-bucket
         S3Key: /
 
   LambdaFunctionRole:

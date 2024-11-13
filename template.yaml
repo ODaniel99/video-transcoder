@@ -45,7 +45,7 @@ Resources:
             - CompleteMultipartUpload
           requestParameters:
             bucketName:
-              - !Ref InputBucketName
+              - video-transcoder-input-bucket
             key:
               - "/"
         Targets:

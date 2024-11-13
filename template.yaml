@@ -62,7 +62,7 @@ Resources:
       MemorySize: 1024
       Code:
         S3Bucket: video-transcoder-application-code-bucket
-        S3Key: /
+        S3Key: video-transcoder.zip
 
   LambdaFunctionRole:
     Type: AWS::IAM::Role
